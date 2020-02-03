@@ -1,4 +1,3 @@
-
 <!DOCTYPE html>
 
 <html lang="en">
@@ -12,7 +11,7 @@
 <link rel="stylesheet" href="/css/app.css">
 </head>
 <body class="hold-transition sidebar-mini">
-<div class="wrapper">
+<div class="wrapper" id="app">
 
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -29,9 +28,7 @@
         <input class="form-control form-control-navbar" type="search" placeholder="Search" aria-label="Search">
         <div class="input-group-append">
           <button class="btn btn-navbar" type="submit">
-            <i class="fas fa-search"></i>
-        
-            
+            <i class="fas fa-search"></i>    
           </button>
         </div>
       </div>
@@ -58,7 +55,7 @@
           <img src="./img/profile.png" class="img-circle elevation-2" alt="User Image">
         </div>
         <div class="info">
-          <a href="#" class="d-block">Alexander Pierce</a>
+          <a href="#" class="d-block">{{Auth::user()->name}}</a>
         </div>
       </div>
 
@@ -68,34 +65,33 @@
           <!-- Add icons to the links using the .nav-icon class
                with font-awesome or any other icon font library -->
           <li class="nav-item has-treeview menu-open">
-            <a href="#" class="nav-link active">
+            <router-link to="/" class="nav-link active">
               <i class="nav-icon fas fa-tachometer-alt"></i>
               <p>
-                Starter Pages
+               Dashboard
                 <i class="right fas fa-angle-left"></i>
               </p>
-            </a>
+            </router-link>
             <ul class="nav nav-treeview">
               <li class="nav-item">
-                <a href="#" class="nav-link active">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Active Page</p>
-                </a>
+                <router-link to="#" class="nav-link active">
+                <i class="fas fa-cog"></i>
+                  <p>Managment</p>
+                </router-link>
               </li>
               <li class="nav-item">
-                <a href="#" class="nav-link">
-                  <i class="far fa-circle nav-icon"></i>
-                  <p>Inactive Page</p>
-                </a>
+                <router-link to="/profile" class="nav-link">
+                <i class="fas fa-user-tie"></i>
+                  <p>Profile</p>
+              </router-link>
               </li>
             </ul>
           </li>
           <li class="nav-item">
             <a href="#" class="nav-link">
-              <i class="nav-icon fas fa-th"></i>
+            <i class="fas fa-sign-out-alt"></i>
               <p>
-                Simple Link
-                <span class="right badge badge-danger">New</span>
+                Logout
               </p>
             </a>
           </li>
@@ -106,95 +102,15 @@
     <!-- /.sidebar -->
   </aside>
 
-  <!-- Content Wrapper. Contains page content -->
-  <div class="content-wrapper">
-    <!-- Content Header (Page header) -->
-    <div class="content-header">
-      <div class="container-fluid">
-        <div class="row mb-2">
-          <div class="col-sm-6">
-            <h1 class="m-0 text-dark">Starter Page</h1>
-          </div><!-- /.col -->
-          <div class="col-sm-6">
-            <ol class="breadcrumb float-sm-right">
-              <li class="breadcrumb-item"><a href="#">Home</a></li>
-              <li class="breadcrumb-item active">Starter Page</li>
-            </ol>
-          </div><!-- /.col -->
-        </div><!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content-header -->
-
-    <!-- Main content -->
-    <div class="content">
-      <div class="container-fluid">
-        <div class="row">
-          <div class="col-lg-6">
-            <div class="card">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-
-                <p class="card-text">
-                  Some quick example text to build on the card title and make up the bulk of the card's
-                  content.
-                </p>
-
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
-              </div>
-            </div>
-
-            <div class="card card-primary card-outline">
-              <div class="card-body">
-                <h5 class="card-title">Card title</h5>
-
-                <p class="card-text">
-                  Some quick example text to build on the card title and make up the bulk of the card's
-                  content.
-                </p>
-                <a href="#" class="card-link">Card link</a>
-                <a href="#" class="card-link">Another link</a>
-              </div>
-            </div><!-- /.card -->
-          </div>
-          <!-- /.col-md-6 -->
-          <div class="col-lg-6">
-            <div class="card">
-              <div class="card-header">
-                <h5 class="m-0">Featured</h5>
-              </div>
-              <div class="card-body">
-                <h6 class="card-title">Special title treatment</h6>
-
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-              </div>
-            </div>
-
-            <div class="card card-primary card-outline">
-              <div class="card-header">
-                <h5 class="m-0">Featured</h5>
-              </div>
-              <div class="card-body">
-                <h6 class="card-title">Special title treatment</h6>
-
-                <p class="card-text">With supporting text below as a natural lead-in to additional content.</p>
-                <a href="#" class="btn btn-primary">Go somewhere</a>
-              </div>
-            </div>
-          </div>
-          <!-- /.col-md-6 -->
-        </div>
-        <!-- /.row -->
-      </div><!-- /.container-fluid -->
-    </div>
-    <!-- /.content -->
+<div class ="content">
+  <div class="container-fluid">
+    <router-view></router-view>
   </div>
-  <!-- /.content-wrapper -->
+
+</div>
 
  
-
+</div>
   <!-- Main Footer -->
   <footer class="main-footer">
     <!-- To the right -->
@@ -202,10 +118,10 @@
       Anything you want
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2014-2019 <a href="https://adminlte.io">AdminLTE.io</a>.</strong> All rights reserved.
+    <strong>Copyright &copy; 2014-2019 <a href="#">Ketncek</a>.</strong> All rights reserved.
   </footer>
-</div>
 
-<script src="js/app.js"></script>
+
+<script src="{{mix('js/app.js')}}"></script>
 </body>
 </html>

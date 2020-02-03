@@ -11,10 +11,10 @@
 |
 */
 
-Route::get('/', function () {
-    return view('welcome');
-});
+Route::any('{all}', function () {
+    return view('layouts.master');
+})->where('all', '^((?!(api|broadcast)).)*');
 
-Auth::routes();
+// Auth::routes();
 
-Route::get('/home', 'HomeController@index')->name('home');
+// Route::get('/home', 'HomeController@index')->name('home');

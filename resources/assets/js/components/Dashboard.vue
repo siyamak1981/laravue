@@ -3,10 +3,10 @@
         <div class="row justify-content-center">
             <div class="col-md-8">
                 <div class="card">
-                    <div class="card-header">Example Component</div>
-    <router-view></router-view>
+                    <div class="card-header">Dashboard Component</div>
+                    
                     <div class="card-body">
-                        I'm an example component.
+                        I'm an dashboard component.
                     </div>
                 </div>
             </div>
