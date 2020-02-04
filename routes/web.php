@@ -15,6 +15,11 @@ Route::any('{all}', function () {
     return view('layouts.master');
 })->where('all', '^((?!(api|broadcast)).)*');
 
+
+// Route::get('/', function () {
+//     return view('welcome');
+// });
+
 // Auth::routes();
 
 // Route::get('/home', 'HomeController@index')->name('home');

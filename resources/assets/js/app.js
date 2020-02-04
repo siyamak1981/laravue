@@ -12,10 +12,12 @@ import VueRouter from 'vue-router'
 Vue.use(VueRouter)
 
 import Dashboard from './components/Dashboard.vue';
+import Users from './components/Users.vue';
 import Profile from './components/Profile.vue';
 
 let routes = [
-    { path: '/', component: Dashboard },
+    { path: '/dashboard', component: Dashboard },
+    { path: '/users', component: Users },
     { path: '/profile', component: Profile }
   ]
 
