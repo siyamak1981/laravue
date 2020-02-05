@@ -2140,26 +2140,19 @@ __webpack_require__.r(__webpack_exports__);
       });
     },
     createUser: function createUser() {
-      var _this2 = this;
-
       this.$Progress.start();
       this.form.post('api/user'); // success
 
-      $('#addNew').modal('hide').then(function () {
-        Fire.$emit('AfterCreate');
-        toast.fire('Good job!', 'You clicked the button!', 'success');
-
-        _this2.$Progress.finish();
-      })["catch"](function () {});
+      $('#addNew').modal('hide');
+      toast({
+        type: 'success',
+        title: 'You clicked the button!'
+      });
+      this.$Progress.finish();
     }
   },
   created: function created() {
-    var _this3 = this;
-
-    this.loadUsers();
-    setInterval(function () {
-      return _this3.loadUsers();
-    }, 3000);
+    this.loadUsers(); // setInterval(()=>this.loadUsers(), 3000);
   }
 });
 
@@ -74898,27 +74891,24 @@ __webpack_require__.r(__webpack_exports__);
 /* harmony import */ var sweetalert2__WEBPACK_IMPORTED_MODULE_3___default = /*#__PURE__*/__webpack_require__.n(sweetalert2__WEBPACK_IMPORTED_MODULE_3__);
 /* harmony import */ var vue_progressbar__WEBPACK_IMPORTED_MODULE_4__ = __webpack_require__(/*! vue-progressbar */ "./node_modules/vue-progressbar/dist/vue-progressbar.js");
 /* harmony import */ var vue_progressbar__WEBPACK_IMPORTED_MODULE_4___default = /*#__PURE__*/__webpack_require__.n(vue_progressbar__WEBPACK_IMPORTED_MODULE_4__);
-/* harmony import */ var _components_Dashboard_vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! ./components/Dashboard.vue */ "./resources/assets/js/components/Dashboard.vue");
-/* harmony import */ var _components_Users_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Users.vue */ "./resources/assets/js/components/Users.vue");
-/* harmony import */ var _components_Profile_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/Profile.vue */ "./resources/assets/js/components/Profile.vue");
-/**
- * First we will load all of this project's JavaScript dependencies which
- * includes Vue and other libraries. It is a great starting point when
- * building robust, powerful web applications using Vue and Laravel.
- */
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_5__ = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
+/* harmony import */ var vue__WEBPACK_IMPORTED_MODULE_5___default = /*#__PURE__*/__webpack_require__.n(vue__WEBPACK_IMPORTED_MODULE_5__);
+/* harmony import */ var _components_Dashboard_vue__WEBPACK_IMPORTED_MODULE_6__ = __webpack_require__(/*! ./components/Dashboard.vue */ "./resources/assets/js/components/Dashboard.vue");
+/* harmony import */ var _components_Users_vue__WEBPACK_IMPORTED_MODULE_7__ = __webpack_require__(/*! ./components/Users.vue */ "./resources/assets/js/components/Users.vue");
+/* harmony import */ var _components_Profile_vue__WEBPACK_IMPORTED_MODULE_8__ = __webpack_require__(/*! ./components/Profile.vue */ "./resources/assets/js/components/Profile.vue");
 __webpack_require__(/*! ./bootstrap */ "./resources/assets/js/bootstrap.js");
 
 window.Vue = __webpack_require__(/*! vue */ "./node_modules/vue/dist/vue.common.js");
 
 
 window.Form = vform__WEBPACK_IMPORTED_MODULE_1__["Form"];
-Vue.component(vform__WEBPACK_IMPORTED_MODULE_1__["HasError"].name, vform__WEBPACK_IMPORTED_MODULE_1__["HasError"]);
-Vue.component(vform__WEBPACK_IMPORTED_MODULE_1__["AlertError"].name, vform__WEBPACK_IMPORTED_MODULE_1__["AlertError"]);
-Vue.component(vform__WEBPACK_IMPORTED_MODULE_1__["AlertErrors"].name, vform__WEBPACK_IMPORTED_MODULE_1__["AlertErrors"]);
-Vue.component(vform__WEBPACK_IMPORTED_MODULE_1__["AlertSuccess"].name, vform__WEBPACK_IMPORTED_MODULE_1__["AlertSuccess"]);
+vue__WEBPACK_IMPORTED_MODULE_5___default.a.component(vform__WEBPACK_IMPORTED_MODULE_1__["HasError"].name, vform__WEBPACK_IMPORTED_MODULE_1__["HasError"]);
+vue__WEBPACK_IMPORTED_MODULE_5___default.a.component(vform__WEBPACK_IMPORTED_MODULE_1__["AlertError"].name, vform__WEBPACK_IMPORTED_MODULE_1__["AlertError"]);
+vue__WEBPACK_IMPORTED_MODULE_5___default.a.component(vform__WEBPACK_IMPORTED_MODULE_1__["AlertErrors"].name, vform__WEBPACK_IMPORTED_MODULE_1__["AlertErrors"]);
+vue__WEBPACK_IMPORTED_MODULE_5___default.a.component(vform__WEBPACK_IMPORTED_MODULE_1__["AlertSuccess"].name, vform__WEBPACK_IMPORTED_MODULE_1__["AlertSuccess"]);
 
 
-var toast = sweetalert2__WEBPACK_IMPORTED_MODULE_3___default.a.fire({
+sweetalert2__WEBPACK_IMPORTED_MODULE_3___default.a.fire({
   toast: true,
   position: 'top-end',
   icon: 'success',
@@ -74926,48 +74916,50 @@ var toast = sweetalert2__WEBPACK_IMPORTED_MODULE_3___default.a.fire({
   showConfirmButton: false,
   timer: 1500
 });
-window.Swal = toast;
-Vue.use(vue_router__WEBPACK_IMPORTED_MODULE_2__["default"]);
+window.Swal = sweetalert2__WEBPACK_IMPORTED_MODULE_3___default.a;
+vue__WEBPACK_IMPORTED_MODULE_5___default.a.use(vue_router__WEBPACK_IMPORTED_MODULE_2__["default"]);
+
 
 
 
 
 var routes = [{
   path: '/dashboard',
-  component: _components_Dashboard_vue__WEBPACK_IMPORTED_MODULE_5__["default"]
+  component: _components_Dashboard_vue__WEBPACK_IMPORTED_MODULE_6__["default"]
 }, {
   path: '/users',
-  component: _components_Users_vue__WEBPACK_IMPORTED_MODULE_6__["default"]
+  component: _components_Users_vue__WEBPACK_IMPORTED_MODULE_7__["default"]
 }, {
   path: '/profile',
-  component: _components_Profile_vue__WEBPACK_IMPORTED_MODULE_7__["default"]
+  component: _components_Profile_vue__WEBPACK_IMPORTED_MODULE_8__["default"]
 }];
 var router = new vue_router__WEBPACK_IMPORTED_MODULE_2__["default"]({
   mode: 'history',
   routes: routes // short for `routes: routes`
 
 });
-Vue.use(vue_progressbar__WEBPACK_IMPORTED_MODULE_4___default.a, {
-  color: 'rgb(143, 255, 199)',
-  failedColor: 'red',
-  height: '3px'
+vue__WEBPACK_IMPORTED_MODULE_5___default.a.use(vue_progressbar__WEBPACK_IMPORTED_MODULE_4___default.a, {
+  color: '#bffaf3',
+  failedColor: '#874b4b',
+  thickness: '5px',
+  transition: {
+    speed: '0.2s',
+    opacity: '0.6s',
+    termination: 300
+  },
+  autoRevert: true,
+  inverse: false
 });
-Vue.filter('upText', function (text) {
+vue__WEBPACK_IMPORTED_MODULE_5___default.a.filter('upText', function (text) {
   return text.charAt(0).toUpperCase() + text.slice(1);
 });
-Vue.filter('myDate', function (created) {
+vue__WEBPACK_IMPORTED_MODULE_5___default.a.filter('myDate', function (created) {
   return moment__WEBPACK_IMPORTED_MODULE_0___default()(created).format('MMMM Do YYYY');
 });
-/**
- * Next, we will create a fresh Vue application instance and attach it to
- * the page. Then, you may begin adding components to this application
- * or customize the JavaScript scaffolding to fit your unique needs.
- */
-
-var app = new Vue({
+var app = new vue__WEBPACK_IMPORTED_MODULE_5___default.a({
   el: '#app',
   router: router
-});
+}).$mount('#app');
 
 /***/ }),
 

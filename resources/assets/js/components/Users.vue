@@ -122,7 +122,6 @@
     </div>
 </template>
 <script>
-
      export default {
         data() {
             return {
@@ -148,24 +147,19 @@
                 this.form.post('api/user')        
                     // success
                 $('#addNew').modal('hide')
-                .then(() => {
-                    Fire.$emit('AfterCreate');
-                     toast.fire(
-                        'Good job!',
-                        'You clicked the button!',
-                        'success'
-                    )  
-                    this.$Progress.finish();
+                toast({
+                       type: 'success',
+                       title: 'You clicked the button!',
                         
-                })
-                .catch(() => {
-                   
-                });
+                     }) 
+              
+                    this.$Progress.finish();
+        
             }
         },
         created(){
             this.loadUsers();
-            setInterval(()=>this.loadUsers(), 3000);
+            // setInterval(()=>this.loadUsers(), 3000);
         }
      }
         
