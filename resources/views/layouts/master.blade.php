@@ -11,7 +11,7 @@
 <link rel="stylesheet" href="/css/app.css">
 </head>
 <body class="hold-transition sidebar-mini">
-<div class="wrapper" id="app">
+<div class="wrapper" id="app" >
 
   <!-- Navbar -->
   <nav class="main-header navbar navbar-expand navbar-white navbar-light">
@@ -136,15 +136,15 @@
     </div>
     <!-- /.sidebar -->
   </aside>
-
-<div class ="content">
-  <div class="container-fluid">
-    <router-view></router-view>
-    <vue-progress-bar></vue-progress-bar>
+<div class = "content-wrapper">
+  <div class ="content">
+    <div class="container-fluid">
+      <router-view></router-view>
+      <vue-progress-bar></vue-progress-bar>
+    </div>
   </div>
 </div>
 
- 
 </div>
   <!-- Main Footer -->
   <footer class="main-footer">

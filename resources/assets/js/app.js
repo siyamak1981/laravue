@@ -20,24 +20,27 @@ Vue.component(AlertSuccess.name, AlertSuccess)
 
 
 import VueRouter from 'vue-router';
-import Swal from 'sweetalert2';
-
-
-Swal.fire({
-  toast: true,
-  position: 'top-end',
-  icon: 'success',
-  title: 'User Created in successfully',
-  showConfirmButton: false,
-  timer: 1500
-})
-
+import Swal from 'sweetalert2'
 window.Swal = Swal;
 
 Vue.use(VueRouter)
 
 import VueProgressBar from 'vue-progressbar';
 import Vue from 'vue';
+Vue.use(VueProgressBar, {
+  color: '#bffaf3',
+  failedColor: '#874b4b',
+  thickness: '5px',
+  transition: {
+    speed: '0.2s',
+    opacity: '0.6s',
+    termination: 300
+  },
+  autoRevert: true,
+  inverse: false
+})
+
+
 
 import Dashboard from './components/Dashboard.vue';
 import Users from './components/Users.vue';
@@ -55,18 +58,7 @@ const router = new VueRouter({
     })
 
   
-Vue.use(VueProgressBar, {
-  color: '#bffaf3',
-  failedColor: '#874b4b',
-  thickness: '5px',
-  transition: {
-    speed: '0.2s',
-    opacity: '0.6s',
-    termination: 300
-  },
-  autoRevert: true,
-  inverse: false
-  })
+
     
 
 

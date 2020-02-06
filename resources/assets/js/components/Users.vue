@@ -1,7 +1,7 @@
 <template>
-    <div class="container" style="margin-left:250px;">
+    <div class="container">
         <div class="row mt-5">
-          <div class="col-md-11">
+          <div class="col-md-12">
             <div class="card">
               <div class="card-header">
                 <h3 class="card-title">Users Table</h3>
@@ -144,14 +144,18 @@
             },
             createUser(){
                 this.$Progress.start()
+                
                 this.form.post('api/user')        
                     // success
                 $('#addNew').modal('hide')
-                toast({
-                       type: 'success',
-                       title: 'You clicked the button!',
-                        
-                     }) 
+                
+                Swal.fire({
+                        position: 'top-end',
+                        icon: 'success',
+                        title: 'Your work has been saved',
+                        showConfirmButton: false,
+                        timer: 1500
+                        })
               
                     this.$Progress.finish();
         
@@ -159,7 +163,7 @@
         },
         created(){
             this.loadUsers();
-            // setInterval(()=>this.loadUsers(), 3000);
+            setInterval(()=>this.loadUsers(), 3000);
         }
      }
         
