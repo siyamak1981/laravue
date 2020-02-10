@@ -153,8 +153,10 @@
       Anything you want
     </div>
     <!-- Default to the left -->
-    <strong>Copyright &copy; 2014-2019 <a href="#">Ketncek</a>.</strong> All rights reserved.
+    <strong>Copyright &copy; 2014-2018 <a href="Ketencek">Ketencek</a>.</strong> All rights reserved.
   </footer>
+</div>
+<!-- ./wrapper -->
 
 
 <script src="{{mix('js/app.js')}}"></script>

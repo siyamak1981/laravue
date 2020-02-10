@@ -43,11 +43,13 @@ Vue.use(VueProgressBar, {
 
 
 import Dashboard from './components/Dashboard.vue';
+import Developer from './components/Developer.vue';
 import Users from './components/Users.vue';
 import Profile from './components/Profile.vue';
 
 let routes = [
     { path: '/dashboard', component: Dashboard },
+    { path: '/developer', component: Developer },
     { path: '/users', component: Users },
     { path: '/profile', component: Profile }
   ]
@@ -70,7 +72,20 @@ Vue.filter('myDate',function(created){
   return moment(created).format('MMMM Do YYYY');
 });
 
+Vue.component(
+  'passport-clients',
+  require('./components/passport/Clients.vue').default
+);
 
+Vue.component(
+  'passport-authorized-clients',
+  require('./components/passport/AuthorizedClients.vue').default
+);
+
+Vue.component(
+  'passport-personal-access-tokens',
+  require('./components/passport/PersonalAccessTokens.vue').default
+);
 
 const app = new Vue({
     el: '#app',

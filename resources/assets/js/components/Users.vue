@@ -7,7 +7,7 @@
                 <h3 class="card-title">Users Table</h3>
 
                 <div class="card-tools">
-                    <button class="btn btn-success"  data-toggle="modal" data-target="#addNew"> Add New <i class="fas fa-user-plus fa-fw"></i></button>
+                    <button class="btn btn-success"  data-toggle="modal" data-target="#addNew" @click="newModel"> Add New <i class="fas fa-user-plus fa-fw"></i></button>
                 </div>
               </div>
               <!-- /.card-header -->
@@ -31,11 +31,11 @@
                     <td>{{user.created_at| myDate}}</td>
 
                     <td>
-                        <a href="#">
+                          <a href="#" @click="editModel(user)">
                             <i class="fa fa-edit blue"></i>
                         </a>
                         /
-                        <a href="#">
+                        <a href="#" @click="deleteUser(user.id)">
                             <i class="fa fa-trash red"></i>
                         </a>
 
@@ -139,32 +139,98 @@
             }
         },
         methods:{
+           updateUser(){
+                this.$Progress.start();
+                // console.log('Editing data');
+                this.form.put('api/user/'+this.form.id)
+                .then(() => {
+                    // success
+                    $('#addNew').modal('hide');
+                      Swal.fire(
+                        'Updated!',
+                        'Information has been Updated.',
+                        'success'
+                        )
+                        this.$Progress.finish();
+                         Fire.$emit('AfterCreate');
+                })
+                .catch(() => {
+                    this.$Progress.fail();
+                });
+            },
+            editModel(user){
+                this.editmode = true;
+                 this.form.reset();
+                $('#addNew').modal('show');
+                this.form.fill(user);
+            },
+            newModel(){
+                this.editmode = false;
+                this.form.reset();
+                $('#addNew').modal('hide')
+            },
+            deleteUser(id){
+                    Swal.fire({
+                            title: 'Are you sure?',
+                            text: "You won't be able to revert this!",
+                            icon: 'warning',
+                            showCancelButton: true,
+                            confirmButtonColor: '#3085d6',
+                            cancelButtonColor: '#d33',
+                            confirmButtonText: 'Yes, delete it!'
+                            }).then((result) => {
+                                if(result.value){
+
+                                    this.form.delete('api/user/'+id).then(()=>{
+                                            Swal.fire(
+                                            'Deleted!',
+                                            'Your file has been deleted.',
+                                            'success'
+                                            )
+                                            Fire.$emit('AfterCreate');
+                                    }).catch(()=>{
+                                         Swal.fire(
+                                            'Failed!',
+                                            'There was somthing wrong',
+                                            'warning'
+                                            );
+                                    })
+                                }
+                            })
+                        },
             loadUsers(){
                 axios.get("api/user").then(({data})=>(this.users = data));              
             },
             createUser(){
                 this.$Progress.start()
-                
-                this.form.post('api/user')        
-                    // success
-                $('#addNew').modal('hide')
-                
-                Swal.fire({
-                        position: 'top-end',
-                        icon: 'success',
-                        title: 'Your work has been saved',
-                        showConfirmButton: false,
-                        timer: 1500
-                        })
-              
-                    this.$Progress.finish();
-        
+                    this.form.post('api/user')        
+                .then(()=>{
+                    Fire.$emit('AfterCreate');
+                        // success
+                    $('#addNew').modal('hide')
+                    
+                    Swal.fire({
+                            position: 'top-end',
+                            icon: 'success',
+                            title: 'Your work has been saved',
+                            showConfirmButton: false,
+                            timer: 1500
+                            })
+                  
+                        this.$Progress.finish();
+                })
+                .catch(()=>{
+
+                })
             }
         },
         created(){
             this.loadUsers();
-            setInterval(()=>this.loadUsers(), 3000);
-        }
-     }
+            // Fire.$on('AfterCreate',() => {
+                // this.loadUsers();
+            // });
+            //    setInterval(() => this.loadUsers(), 3000);
+            }
+    }
         
 </script>
