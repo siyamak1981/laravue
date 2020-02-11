@@ -163,13 +163,15 @@
 
             console.log('Component mounted.')
         },
-
         methods:{
-
-            getProfilePhoto(){
-
-                let photo = (this.form.photo.length > 200) ? this.form.photo : "img/profile/"+ this.form.photo ;
+            getProfilePhoto($event){
+               
+                let photo = (this.form.photo.length > 200) ? this.form.photo :'img/profile/'+this.form.photo ;
                 return photo;
+            
+                        // let prefix = (this.form.photo.match(/\//) ? '' : '/img/profile/');
+                        // return prefix + this.form.photo;
+                        
             },
 
             updateInfo(){

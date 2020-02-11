@@ -17,6 +17,7 @@ class UserController extends Controller
     public function __construct()
     {
         $this->middleware('auth:api');
+        
     }
     /**
      * Display a listing of the resource.
@@ -25,7 +26,11 @@ class UserController extends Controller
      */
     public function index()
     {
-        return User::latest()->paginate(10);
+        // $this->authorize('isAdmin');
+        if(\Gate::allows('isAdmin') || \Gate::allows('idAuthor')){
+
+            return User::latest()->paginate(5);
+        }
     }
 
     /**
@@ -130,7 +135,20 @@ class UserController extends Controller
      */
     public function destroy($id)
     {
+        $this->authorize('isAdmin');
         $user = User::findOrFail($id)->delete();
         return ['message' => 'User Deleted'];
+    }
+
+    public function search(){
+        if ($search = \Request::get('q')) {
+            $users = User::where(function($query) use ($search){
+                $query->where('name','LIKE',"%$search%")
+                        ->orWhere('email','LIKE',"%$search%");
+            })->paginate(20); 
+        }else{
+            $users = User::latest()->paginate(5);
+        }
+        return $users;
     }
 }

@@ -12,6 +12,11 @@ import {
     AlertSuccess
   } from 'vform';
 
+
+import Gate from "./Gate";
+Vue.prototype.$gate = new Gate(window.user);
+
+window.Fire = new Vue();
 window.Form = Form;
 Vue.component(HasError.name, HasError)
 Vue.component(AlertError.name, AlertError)
@@ -41,17 +46,19 @@ Vue.use(VueProgressBar, {
 })
 
 
-
+Vue.component('pagination', require('laravel-vue-pagination'));
 import Dashboard from './components/Dashboard.vue';
 import Developer from './components/Developer.vue';
 import Users from './components/Users.vue';
 import Profile from './components/Profile.vue';
+import NotFound from './components/NotFound.vue';
 
 let routes = [
     { path: '/dashboard', component: Dashboard },
     { path: '/developer', component: Developer },
     { path: '/users', component: Users },
-    { path: '/profile', component: Profile }
+    { path: '/profile', component: Profile },
+    { path: '*', component: NotFound }
   ]
 
 const router = new VueRouter({
@@ -60,10 +67,6 @@ const router = new VueRouter({
     })
 
   
-
-    
-
-
 Vue.filter('upText', function(text){
   return text.charAt(0).toUpperCase() + text.slice(1)
 });
@@ -86,9 +89,23 @@ Vue.component(
   'passport-personal-access-tokens',
   require('./components/passport/PersonalAccessTokens.vue').default
 );
+Vue.component(
+  'not-found',
+  require('./components/NotFound.vue').default
+);
 
 const app = new Vue({
-    el: '#app',
-    router,
-   
-}).$mount('#app');
+  el: '#app',
+  router,
+  data:{
+      search: ''
+  },
+  methods:{
+    searchit: _.debounce(() => {
+        Fire.$emit('searching');
+    },1000),
+    printme(){
+      window.print(); 
+    }
+},
+});
